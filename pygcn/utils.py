@@ -28,8 +28,8 @@ def load_data(path="../data/cora/", dataset="cora"):
                                     dtype=np.int32)
     edges = np.array(list(map(idx_map.get, edges_unordered.flatten())),
                      dtype=np.int32).reshape(edges_unordered.shape)
-    adj = sp.coo_matrix((np.ones(edges.shape[0]), (edges[:, 0], edges[:, 1])),      #edges是n*2的矩阵，np.ones(edges.shape[0])表示有n个1
-                        shape=(labels.shape[0], labels.shape[0]),                   #edges[:, 0]是边的一侧，edges[:, 1])是另一侧
+    adj = sp.coo_matrix((np.ones(edges.shape[0]), (edges[:, 0], edges[:, 1])),      #edges是edge数*2的矩阵，np.ones(edges.shape[0])表示有edge数个1
+                        shape=(labels.shape[0], labels.shape[0]),                   #edges[:, 0]是边的一侧，edges[:, 1])是另一侧。labels.shape[0]表示节点总数
                         dtype=np.float32)
 
     # build symmetric adjacency matrix
