@@ -16,7 +16,7 @@ def load_data(path="../data/cora/", dataset="cora"):
     """Load citation network dataset (cora only for now)"""
     print('Loading {} dataset...'.format(dataset))
 
-    idx_features_labels = np.genfromtxt("{}{}.content".format(path, dataset),
+    idx_features_labels = np.genfromtxt("{}{}.content".format(path, dataset),   #第一列是id，第二列到最后第二列是特征，最后一列是label
                                         dtype=np.dtype(str))
     features = sp.csr_matrix(idx_features_labels[:, 1:-1], dtype=np.float32)
     labels = encode_onehot(idx_features_labels[:, -1])
@@ -28,8 +28,8 @@ def load_data(path="../data/cora/", dataset="cora"):
                                     dtype=np.int32)
     edges = np.array(list(map(idx_map.get, edges_unordered.flatten())),
                      dtype=np.int32).reshape(edges_unordered.shape)
-    adj = sp.coo_matrix((np.ones(edges.shape[0]), (edges[:, 0], edges[:, 1])),
-                        shape=(labels.shape[0], labels.shape[0]),
+    adj = sp.coo_matrix((np.ones(edges.shape[0]), (edges[:, 0], edges[:, 1])),      #edges是n*2的矩阵，np.ones(edges.shape[0])表示有n个1
+                        shape=(labels.shape[0], labels.shape[0]),                   #edges[:, 0]是边的一侧，edges[:, 1])是另一侧
                         dtype=np.float32)
 
     # build symmetric adjacency matrix
