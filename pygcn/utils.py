@@ -22,8 +22,8 @@ def load_data(path="../data/cora/", dataset="cora"):
     labels = encode_onehot(idx_features_labels[:, -1])
 
     # build graph
-    idx = np.array(idx_features_labels[:, 0], dtype=np.int32)
-    idx_map = {j: i for i, j in enumerate(idx)}
+    idx = np.array(idx_features_labels[:, 0], dtype=np.int32)                   #adj中的idx应该和n个节点在features中的顺序对应
+    idx_map = {j: i for i, j in enumerate(idx)}                                 
     edges_unordered = np.genfromtxt("{}{}.cites".format(path, dataset),
                                     dtype=np.int32)
     edges = np.array(list(map(idx_map.get, edges_unordered.flatten())),
